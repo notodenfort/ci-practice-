@@ -66,9 +66,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run tests in Docker
         run: |
-          if [ -d "ci-practice" ]; then
-            cp -r ci-practice/* . 2>/dev/null || true
-          fi
+          cp -f ci-practice/requirements.txt . 2>/dev/null || true
+          cp -rf ci-practice/app . 2>/dev/null || true
+          cp -rf ci-practice/tests . 2>/dev/null || true
+          cp -f ci-practice/pytest.ini . 2>/dev/null || true
           docker build -t ci-practice-tests .
           docker run --rm ci-practice-tests
 
